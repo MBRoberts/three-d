@@ -1,0 +1,32 @@
+body {
+	font-family: Monospace;
+	background-color: #000000;
+	margin: 0px;
+	overflow: hidden;
+}
+
+#info {
+	color: skyblue;
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+	display: block;
+}
+
+div.floating {
+	color : #ffffff;
+	background : #000000;
+	opacity : 0.8;
+	width : 80%;
+	height : 80%;
+	position : absolute;
+	left : 10%;
+	top : 10%;
+	border : 1px solid #555555;
+	padding : 10px;
+	display : none;
+	overflow : auto;
+	z-index: 100;
+}
