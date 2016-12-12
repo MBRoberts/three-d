@@ -30,3 +30,13 @@ div.floating {
 	overflow : auto;
 	z-index: 100;
 }
+
+#video, #canvas {
+	bottom: 0;
+	position: absolute;
+	z-index: 100;
+}
+
+#viewport {
+	padding-top: 40px;
+}

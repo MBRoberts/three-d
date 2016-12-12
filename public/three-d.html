@@ -28,20 +28,17 @@
 		<div id="container"></div>
 
 		<div id="info">
-			<span>Press &uarr;, &darr;, &larr;, or &rarr; to rotate objects / </span>
-			<span>Drag mouse to change camera angle</span>
-			<p>
-				<span>Click mouse to rotate on z-axis, Right-click mouse for reverse</span>
-			</p>
+			<span><h2>Camera will move with your face</h2></span>
+		</div>
+
+		<div id="viewport">
+		  	<video id="video" width="320" height="240" preload autoplay loop muted></video>
+		  	<canvas id="canvas" width="320" height="240"></canvas>
 		</div>
 		
-		
 		<script src="assets/js/three.js"></script>
-		<script src="assets/js/stats.min.js"></script>
-		<script src="assets/js/dat.gui.min.js"></script>
-		<script src="assets/js/OrbitControls.js"></script>
-		<script src="assets/js/effects/AnaglyphEffect.js"></script>
-		<script src="assets/js/Detector.js"></script>
+		<script type="text/javascript" src="assets/js/face-tracking/tracking.js"></script>
+		<script src="assets/js/face-tracking/face.js"></script>
 		<script type="text/javascript" src="assets/js/three-d.js"></script>
 
 	</body>
