@@ -151,21 +151,21 @@ function addGeometry() {
 
 	var geometry = new THREE.ConeBufferGeometry( 0.3, 0.7, 50 );
 	var mesh = new THREE.Mesh(geometry, floorMat);	
-	mesh.position.set( 1, .35, 2 );
+	mesh.position.set( 2.75, .35, -6 );
 	mesh.castShadow = true;
 	mesh.receiveShadow = true;
 	scene.add( mesh );
 
 	var geometry2 = new THREE.BoxBufferGeometry( 0.75, 0.75, 0.75 );
 	var mesh2 = new THREE.Mesh( geometry2, cubeMat );
-	mesh2.position.set(-2, 0.36, 1);
+	mesh2.position.set(-4, 0.36, -1);
 	mesh2.castShadow = true;
 	mesh2.receiveShadow = true;
 	scene.add( mesh2 );
 
 	var geometry3 = new THREE.SphereBufferGeometry( 0.5, 32, 32);
 	var mesh3 = new THREE.Mesh( geometry3, ballMat );
-	mesh3.position.set(0.75, 0.5, -2);
+	mesh3.position.set(1.75, 0.5, -1.5);
 	mesh3.castShadow = true;
 	mesh3.receiveShadow = true;
 	scene.add( mesh3 );
@@ -174,10 +174,10 @@ function addGeometry() {
 	var sphereMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube, metalness: 1, needsUpdate: true } );
 
 	for ( var i = 0; i < 500; i ++ ) {
-		var sphereMesh = new THREE.Mesh( geometry4, sphereMaterial );
-		sphereMesh.position.x = Math.random() * 50 - 15;
-		sphereMesh.position.y = Math.random() * 50 + 15;
-		sphereMesh.position.z = Math.random() * 50 - 15;
+		var sphereMesh = new THREE.Mesh( geometry4, ballMat );
+		sphereMesh.position.x = (Math.random() * 5) - 2;
+		sphereMesh.position.y = (Math.random() * 5) - 2;
+		sphereMesh.position.z = (Math.random() * 5) + 5;
 		sphereMesh.castShadow = true;
 		sphereMesh.receiveShadow = true;
 		sphereMesh.scale.x = sphereMesh.scale.y = sphereMesh.scale.z = Math.random() * 2 + 1;
@@ -204,23 +204,23 @@ function init() {
 	renderer.toneMapping = THREE.ReinhardToneMapping;
 	container.appendChild( renderer.domElement );
 
-	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 100 );
-	camera.position.x = -4;
-	camera.position.z = 4;
+	camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.8, 50 );
+	camera.position.x = 60;
+	camera.position.z = 3;
 	camera.position.y = 2;
 
 	scene = new THREE.Scene();
 	scene.background = textureCube;
 
-	bulbLight = new THREE.PointLight( 0xffee88, 1, 100, 2 );
+	bulbLight = new THREE.PointLight( 0xffee88, 1, 100, 1.5 );
 	bulbMat = new THREE.MeshStandardMaterial( {
 		emissive: 0xffffee,
-		emissiveIntensity: 1,
-		color: 0x000000
+		emissiveIntensity: 100,
+		color: 0xFFFFFF
 	});
 
 	bulbLight.add( new THREE.Mesh( bulbGeometry, bulbMat ) );
-	bulbLight.position.set( 0, 1, 0 );
+	bulbLight.position.set( 0, 1.75, 0 );
 	bulbLight.castShadow = true;
 	scene.add( bulbLight );
 	
@@ -260,9 +260,10 @@ function track( ) {
     var maxRect;
 
     event.data.forEach(function(rect) {
+		
 		if (rect.width * rect.height > maxRectArea){
-		maxRectArea = rect.width * rect.height;
-		maxRect = rect;
+			maxRectArea = rect.width * rect.height;
+			maxRect = rect;
 		}
 
 		context.clearRect(0, 0, canvas.width, canvas.height);
@@ -313,16 +314,17 @@ function animate() {
 	bulbMat.emissiveIntensity = bulbLight.intensity / Math.pow( 0.02, 2.0 ); // convert from intensity to irradiance at bulb surface
 	hemiLight.intensity = hemiLuminousIrradiances[ params.hemiIrradiance ];
 	
-	bulbLight.position.y = Math.cos( timer ) * 0.75 + 1.25;
-	// bulbLight.position.x = Math.cos( timer ) * 1.6 + 1.5;
-	// bulbLight.position.z = Math.sin( timer ) * 1.1 - .25;
+	// bulbLight.position.y = Math.cos( timer ) * 0.75 + 1.25;
+	bulbLight.position.x = Math.cos( timer ) * 3.5 + 2.5;
+	bulbLight.position.z = Math.sin( timer ) * 3.5 - .75;
 	
 	renderer.render( scene, camera );
 	
-	for ( var i = 0, il = spheres.length; i < il; i ++ ) {
+	for ( var i = 0, il = spheres.length; i < il; i++ ) {
 		var sphere = spheres[ i ];
-		sphere.position.x = 10 * Math.cos( (timer/10) + i );
-		sphere.position.y = 10 * Math.sin( (timer/10) + i * 1.1 );
+		sphere.position.x = 25 * Math.cos( (timer/20) + i / 1.1);
+		sphere.position.y = 15 * Math.sin( (timer/20) + i * 1.1 );
+		sphere.position.z = 25 * Math.sin( (timer/20) + i );
 	}
 
 }
